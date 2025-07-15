@@ -1,5 +1,6 @@
-import { Task } from "./task";
-// Hàm đăng nhập để lấy access_token
+import { Task } from "../types/task";
+
+// Đăng nhập để lấy token
 export const login = async (): Promise<string> => {
   const res = await fetch("https://server.aptech.io/auth/login", {
     method: "POST",
@@ -10,13 +11,16 @@ export const login = async (): Promise<string> => {
     }),
     cache: "no-store",
   });
+
   if (!res.ok) {
     throw new Error("Đăng nhập thất bại");
   }
+
   const data = await res.json();
   return data.access_token;
 };
-// Hàm lấy toàn bộ task
+
+// Lấy danh sách toàn bộ task
 export const getTasks = async (): Promise<Task[]> => {
   const token = await login();
   const res = await fetch("https://server.aptech.io/workspaces/tasks", {
@@ -25,10 +29,14 @@ export const getTasks = async (): Promise<Task[]> => {
     },
     cache: "no-store",
   });
+
   if (!res.ok) throw new Error("Không thể tải danh sách task");
-  return res.json();
+
+  const data: Task[] = await res.json(); // ✅ ép kiểu rõ
+  return data;
 };
-// Hàm lấy task theo ID
+
+// Lấy task theo ID
 export const getTaskById = async (id: string): Promise<Task> => {
   const token = await login();
   const res = await fetch(`https://server.aptech.io/workspaces/tasks/${id}`, {
@@ -37,6 +45,9 @@ export const getTaskById = async (id: string): Promise<Task> => {
     },
     cache: "no-store",
   });
+
   if (!res.ok) throw new Error("Không thể tải task");
-  return res.json();
+
+  const data: Task = await res.json(); 
+  return data;
 };

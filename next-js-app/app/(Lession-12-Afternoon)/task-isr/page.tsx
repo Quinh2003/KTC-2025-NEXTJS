@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { RefreshCcwDot, ExternalLink } from "lucide-react";
 import { Task } from "../types/task";
-import { getTasks } from "../types/api";
+import { getTasks } from "../services/api";
 
 export const revalidate = 60;
 

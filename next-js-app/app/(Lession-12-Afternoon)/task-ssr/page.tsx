@@ -1,6 +1,6 @@
 import { Globe } from "lucide-react";
 import { Task } from "../types/task";
-import { getTasks } from "../types/api";
+import { getTasks } from "../services/api";
 
 export const dynamic = "force-dynamic";
 

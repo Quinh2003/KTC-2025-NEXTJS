@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Monitor } from "lucide-react";
-import { getTasks } from "../types/api";
+import { getTasks } from "../services/api";
 import { Task } from "../types/task";
 
 export default function TaskTablePage() {
